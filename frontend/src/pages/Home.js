@@ -45,7 +45,7 @@ const Home = () => {
   const [activeMenu, setActiveMenu] = useState("Profile");
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <div className="fixed bottom-0 left-0 right-0">
         <Header
           menu={menu}
@@ -53,7 +53,7 @@ const Home = () => {
           setActiveMenu={setActiveMenu}
         />
       </div>
-      <div className="flex-grow p-4 bg-[#F6F6FE]">
+      <div className="flex-grow p-4 bg-[#F6F6FE] pb-20">
         {menu.find((item) => item.title === activeMenu)?.component}
       </div>
     </div>
