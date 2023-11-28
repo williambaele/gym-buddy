@@ -15,3 +15,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* TOASTIFY */
+:root {
+  --toastify-color-success: #312e7f !important;
+}

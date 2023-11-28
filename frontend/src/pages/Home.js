@@ -69,7 +69,7 @@ const Home = () => {
         draggable
         pauseOnHover
         theme="light"
-      />{" "}
+      />
     </div>
   );
 };

@@ -16,10 +16,10 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center flex-col h-screen bg-[#121317] px-4 md:px-0">
-      <div class="bg-[#1A1C23] p-6 rounded-xl shadow-sm w-full md:w-1/3">
+    <div className="flex items-center justify-center flex-col h-screen bg-[#F6F6FE] px-4 md:px-0">
+      <div class="bg-[#312E7F] p-6 rounded-xl shadow-sm w-full md:w-1/3">
         <div class="mx-auto max-w-lg text-center ">
-          <h1 class="text-2xl font-bold sm:text-3xl text-gray-300">Sign in</h1>
+          <h1 class="text-2xl font-bold sm:text-3xl text-gray-100">Sign in</h1>
         </div>
 
         <form
@@ -34,7 +34,7 @@ function Login() {
             <div class="relative">
               <input
                 type="email"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm outline-none"
+                class="w-full rounded-lg border-gray-100 p-4 pe-12 text-sm shadow-sm outline-none"
                 placeholder="Enter email"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -97,9 +97,10 @@ function Login() {
           </div>
 
           <div class="flex items-center justify-between">
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-100">
               No account?
-              <a class="underline" href="">
+              <a class="underline" href="/signup">
+                {" "}
                 Sign up
               </a>
             </p>

@@ -8,14 +8,13 @@ const Workout = () => {
     // Check if something is saved in local storage as "workout"
     const savedWorkout = localStorage.getItem("workout");
 
-    // If there is a saved workout, set formVisibility to true
     if (savedWorkout) {
       setFormVisibility(true);
     }
   }, []);
   return (
     <div className="h-full space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Start a workout</h1>
         <div
           className="flex justify-center items-center bg-[#312E7F] px-4 py-1 rounded-md"

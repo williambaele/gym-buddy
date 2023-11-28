@@ -46,6 +46,7 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
     });
   };
 
+  // SAVE THE SET INTO LOCALSTORAGE
   const handleSave = () => {
     const exerciseData = {
       id: exerciseId,
@@ -64,7 +65,7 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
 
     // Save the updated workout data in local storage
     localStorage.setItem("workout", JSON.stringify(savedExercise));
-    toast("Exercice saved");
+    toast.success("Set saved");
 
     // Trigger onSave callback if provided
     if (onSave) {
@@ -87,8 +88,8 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
 
   return (
     <div className="mb-4">
-      <div className="w-full flex items-center justify-between bg-gray-100 rounded-md px-1 py-2 mb-4">
-        <h3 className="text-md font-semibold">Exercise {exerciseId}</h3>
+      <div className="flex items-center justify-between w-full px-1 py-2 mb-4 bg-gray-100 rounded-md">
+        <h3 className="font-semibold text-md">Exercise {exerciseId}</h3>
         {exerciseVisibility === true ? (
           <FiArrowUp
             onClick={() => setExerciseVisibility(!exerciseVisibility)}
@@ -108,7 +109,7 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
         <select
           value={selectedMuscleGroup}
           onChange={handleMuscleGroupChange}
-          className="border px-2 py-1 rounded-md bg-gray-100 w-full col-span-2"
+          className="w-full col-span-2 px-2 py-1 bg-gray-100 border rounded-md"
         >
           {muscleGroups.map((group) => (
             <option key={group} value={group}>
@@ -127,7 +128,7 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
           <select
             value={selectedExercise}
             onChange={(e) => setSelectedExercise(e.target.value)}
-            className="border px-2 py-1 rounded-md bg-gray-100 w-full col-span-2"
+            className="w-full col-span-2 px-2 py-1 bg-gray-100 border rounded-md"
           >
             {(exercisesByMuscleGroup[selectedMuscleGroup] || []).map(
               (exercise) => (
