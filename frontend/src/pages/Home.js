@@ -12,6 +12,8 @@ import Workout from "../views/Workout";
 import Measurement from "../views/Measurement";
 import History from "../views/History";
 import Exercice from "../views/Exercice";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
   const menu = [
@@ -56,6 +58,18 @@ const Home = () => {
       <div className="flex-grow p-4 bg-[#F6F6FE] pb-20">
         {menu.find((item) => item.title === activeMenu)?.component}
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />{" "}
     </div>
   );
 };

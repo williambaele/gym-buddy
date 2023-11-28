@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-const SetForm = ({ setId }) => {
-  const [repetitions, setRepetitions] = useState("");
-  const [weight, setWeight] = useState("");
-
+const SetForm = ({ setId, repetitions, weight, onSetChange }) => {
   return (
     <div className="grid grid-cols-4 mb-2 gap-2">
       <p className="col-span-1">Set {setId}:</p>
@@ -12,14 +9,15 @@ const SetForm = ({ setId }) => {
           type="text"
           placeholder="Repetitions"
           value={repetitions}
-          onChange={(e) => setRepetitions(e.target.value)}
+          onChange={(e) => onSetChange(setId, "repetitions", e.target.value)}
           className="border pl-2 py-1 rounded-md"
         />
+
         <input
           type="text"
           placeholder="Weight"
           value={weight}
-          onChange={(e) => setWeight(e.target.value)}
+          onChange={(e) => onSetChange(setId, "weight", e.target.value)}
           className="border pl-2 py-1 rounded-md"
         />
       </div>
