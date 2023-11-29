@@ -13,14 +13,14 @@ import Measurement from "../views/Measurement";
 import History from "../views/History";
 import Exercice from "../views/Exercice";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
-const Home = () => {
+const Home = ({ user }) => {
   const menu = [
     {
       title: "Profile",
       svg: <FiUser />,
-      component: <Profile />,
+      component: <Profile user={user} />,
     },
     {
       title: "History",
