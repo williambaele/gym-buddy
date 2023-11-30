@@ -95,7 +95,12 @@ function Login() {
               </span>
             </div>
           </div>
-
+          <button
+            type="submit"
+            className="w-full p-1 bg-[#C8C7EB] rounded-md font-bold text-white"
+          >
+            Login
+          </button>
           <div class="flex items-center justify-between">
             <p class="text-sm text-gray-100">
               No account?

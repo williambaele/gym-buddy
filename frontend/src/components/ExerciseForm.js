@@ -16,7 +16,7 @@ const exercisesByMuscleGroup = {
 };
 
 const ExerciseForm = ({ exerciseId, onSave }) => {
-  const [selectedMuscleGroup, setSelectedMuscleGroup] = useState("");
+  const [selectedMuscleGroup, setSelectedMuscleGroup] = useState("Chest");
   const [selectedExercise, setSelectedExercise] = useState("");
   const [sets, setSets] = useState([]);
 

@@ -39,9 +39,9 @@ const FormWorkout = () => {
       ))}
       <button
         onClick={addExercise}
-        className="bg-[#312E7F] text-white px-4 py-2 rounded-md mt-2 flex gap-2 items-center text-sm"
+        className="bg-[#312E7F] text-white px-4 py-1 rounded-md mt-2 flex gap-2 items-center text-sm"
       >
-        <FiPlus style={{ fontSize: "18px" }} />
+        <FiPlus style={{ fontSize: "14px" }} /> Exercise
       </button>
     </div>
   );
