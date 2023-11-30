@@ -14,19 +14,26 @@ const Workout = () => {
   }, []);
   return (
     <div className="h-full space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Start a workout</h1>
-        <div
-          className="flex justify-center items-center bg-[#312E7F] px-4 py-1 rounded-md"
-          onClick={() => setFormVisibility(!formVisibility)}
-        >
-          <FiPlus
-            style={{ fontSize: "24px", color: "white" }}
-            className="cursor-pointer"
-          />
+      {formVisibility ? null : (
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold">Start a workout</h1>
+          <div
+            className="flex justify-center items-center bg-[#312E7F] px-4 py-1 rounded-md"
+            onClick={() => setFormVisibility(!formVisibility)}
+          >
+            <FiPlus
+              style={{ fontSize: "24px", color: "white" }}
+              className="cursor-pointer"
+            />
+          </div>
         </div>
-      </div>
-      {formVisibility ? <FormWorkout /> : null}
+      )}
+      {formVisibility ? (
+        <FormWorkout
+          formVisibility={formVisibility}
+          setFormVisibility={setFormVisibility}
+        />
+      ) : null}
     </div>
   );
 };
