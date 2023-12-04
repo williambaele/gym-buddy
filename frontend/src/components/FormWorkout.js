@@ -5,23 +5,24 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { WorkoutContext } from "../context/WorkoutContext";
 
-const FormWorkout = ({ formVisibility, setFormVisibility }) => {
-  //VARIABLES
+const FormWorkout = ({ formVisibility, setFormVisibility, user }) => {
+  const userId = user._id;
+  // VARIABLES
   const { dispatch } = useContext(WorkoutContext);
   const savedWorkoutKey = "savedWorkout";
   const savedWorkoutKey2 = "workout";
   const apiUrl = "/api/workouts";
   const [exercises, setExercises] = useState([]);
 
-  //LOAD SAVED WORKOUT IF PAGE GOES OFF
+  // LOAD SAVED WORKOUT IF PAGE GOES OFF
   useEffect(() => {
-    const savedWorkout = JSON.parse(localStorage.getItem(savedWorkoutKey)) || {
+    const savedWorkout = JSON.parse(localStorage.getItem("workout")) || {
       exercises: [],
     };
     setExercises(savedWorkout.exercises);
   }, []);
 
-  //DELETE WORKOUT
+  // DELETE WORKOUT
   const deleteWorkout = () => {
     localStorage.removeItem(savedWorkoutKey);
     localStorage.removeItem(savedWorkoutKey2);
@@ -30,7 +31,8 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
     toast.success("Workout deleted");
   };
 
-  //SAVE TO DATABSE ONCLICK
+  console.log(exercises);
+  // SAVE TO DATABASE ONCLICK
   const saveToDatabase = async () => {
     try {
       // Ensure there are exercises to save
@@ -39,8 +41,25 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
         return;
       }
 
+      // Transform the exercises structure to match the backend model
+      const transformedExercises = exercises.map(
+        ({ id, muscleGroup, name, sets }) => ({
+          id,
+          muscleGroup,
+          name,
+          sets: sets.map(({ repetitions, weight }) => ({
+            repetitions: parseInt(repetitions), // Ensure integers are sent
+            weight: parseInt(weight),
+          })),
+        })
+      );
+
       // Make a POST request to your backend API endpoint to save the workout data
-      const response = await axios.post(apiUrl, { savedExercises });
+      const response = await axios.post(apiUrl, {
+        user_id: userId, // Use user._id for the user
+        date: Date.now(), // Use Date.now() for the date
+        exercises: transformedExercises,
+      });
 
       // Dispatch the CREATE_WORKOUT action to update the context state
       dispatch({ type: "CREATE_WORKOUT", payload: response.data });
@@ -52,22 +71,19 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
       toast.success("Workout saved to the database");
     } catch (error) {
       console.error("Error saving workout to the database:", error.message);
+      console.log("Error response from the server:", error.response.data);
       toast.error("Error saving workout to the database");
     }
   };
-
-  //ADD EXERCICE
+  // ADD EXERCISE
   const addExercise = () => {
     setExercises([...exercises, { id: exercises.length + 1 }]);
   };
 
-  //GET THE SAVED DATA FROM CHILD
-  const [savedExercises, setSavedExercises] = useState([]);
-
   return (
     <div className="w-full p-4 bg-white rounded-md shadow-sm">
       <div className="flex items-center justify-between py-2 ">
-        <h2 className="text-lg font-bold ">Workout Details</h2>
+        <h2 className="text-lg font-bold ">Workout details</h2>
         <div className="flex items-center justify-between gap-2 p-2 rounded-md">
           <FiTrash2
             style={{ fontSize: "16px", color: "#FF0000" }}
@@ -88,11 +104,6 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
           exerciseId={index + 1}
           onSave={(savedExercise) => {
             console.log("Saved Exercise:", savedExercise);
-            // Update the state with the saved exercise
-            setSavedExercises((prevExercises) => [
-              ...prevExercises,
-              savedExercise,
-            ]);
           }}
         />
       ))}

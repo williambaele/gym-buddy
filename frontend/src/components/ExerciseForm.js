@@ -67,7 +67,6 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
     const savedExercise = JSON.parse(localStorage.getItem("workout")) || {
       exercises: [],
     };
-    console.log(savedExercise);
 
     // Update the exercise data in the workout array
     savedExercise.exercises[exerciseId - 1] = exerciseData;

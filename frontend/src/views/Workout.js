@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import FormWorkout from "../components/FormWorkout";
 
-const Workout = () => {
+const Workout = ({ user }) => {
   const [formVisibility, setFormVisibility] = useState(false);
   useEffect(() => {
     // Check if something is saved in local storage as "workout"
@@ -30,6 +30,7 @@ const Workout = () => {
       )}
       {formVisibility ? (
         <FormWorkout
+          user={user}
           formVisibility={formVisibility}
           setFormVisibility={setFormVisibility}
         />

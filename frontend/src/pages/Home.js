@@ -30,7 +30,7 @@ const Home = ({ user }) => {
     {
       title: "Workout",
       svg: <FiPlus />,
-      component: <Workout />,
+      component: <Workout user={user} />,
     },
     {
       title: "Exercises",

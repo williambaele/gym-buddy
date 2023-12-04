@@ -19,40 +19,42 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center flex-col h-screen bg-[#F6F6FE] px-4 md:px-0">
-      <div class="bg-[#312E7F] p-6 rounded-xl shadow-sm w-full md:w-1/3">
-        <div class="mx-auto max-w-lg text-center ">
-          <h1 class="text-2xl font-bold sm:text-3xl text-gray-100">Sign in</h1>
+      <div className="bg-[#312E7F] p-6 rounded-xl shadow-sm w-full md:w-1/3">
+        <div className="max-w-lg mx-auto text-center ">
+          <h1 className="text-2xl font-bold text-gray-100 sm:text-3xl">
+            Sign in
+          </h1>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          class="mx-auto mb-0 mt-8 max-w-md space-y-4"
+          className="max-w-md mx-auto mt-8 mb-0 space-y-4"
         >
           <div>
-            <label for="email" class="sr-only">
+            <label htmlFor="email" className="sr-only">
               Email
             </label>
 
-            <div class="relative">
+            <div className="relative">
               <input
                 type="email"
-                class="w-full rounded-lg border-gray-100 p-4 pe-12 text-sm shadow-sm outline-none"
+                className="w-full p-4 text-sm border-gray-100 rounded-lg shadow-sm outline-none pe-12"
                 placeholder="Enter email"
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-              <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <span className="absolute inset-y-0 grid px-4 end-0 place-content-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-400"
+                  className="w-4 h-4 text-gray-400"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
                   />
                 </svg>
@@ -60,35 +62,35 @@ function Login() {
             </div>
           </div>
 
-          <div class="relative">
+          <div className="relative">
             <input
               type={passwordVisible ? "text" : "password"}
-              class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm outline-none"
+              className="w-full p-4 text-sm border-gray-200 rounded-lg shadow-sm outline-none pe-12"
               placeholder="Enter password"
               onChange={(e) => setPassword(e.target.value)}
             />
 
             <span
-              class="absolute inset-y-0 end-0 grid place-content-center px-4"
+              className="absolute inset-y-0 grid px-4 end-0 place-content-center"
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 text-gray-400"
+                className="w-4 h-4 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                 />
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                 />
               </svg>
@@ -100,10 +102,10 @@ function Login() {
           >
             Login
           </button>
-          <div class="flex items-center justify-between">
-            <p class="text-sm text-gray-100">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-100">
               No account?
-              <a class="underline" href="/signup">
+              <a className="underline" href="/signup">
                 {" "}
                 Sign up
               </a>
