@@ -9,7 +9,6 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
   const savedWorkout = JSON.parse(localStorage.getItem("savedWorkout")) || {
     exercises: [],
   };
-
   const [exercises, setExercises] = useState(savedWorkout.exercises);
 
   useEffect(() => {

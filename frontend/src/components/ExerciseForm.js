@@ -48,6 +48,14 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
 
   // SAVE THE SET INTO LOCALSTORAGE
   const handleSave = () => {
+    if (
+      !selectedMuscleGroup ||
+      !selectedExercise ||
+      sets.some((set) => !set.repetitions || !set.weight)
+    ) {
+      toast.error("Please fill in all fields before saving");
+      return;
+    }
     const exerciseData = {
       id: exerciseId,
       muscleGroup: selectedMuscleGroup,
