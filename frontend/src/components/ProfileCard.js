@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProfileCard = ({ user }) => {
+const ProfileCard = ({ user, userWorkouts }) => {
   return (
     <div className="flex h-full gap-2 ">
       <div className="w-20 h-full">
@@ -12,7 +12,7 @@ const ProfileCard = ({ user }) => {
       </div>
       <div className="flex flex-col justify-center gap-1">
         <h2 className="text-xl font-bold">{user.pseudo}</h2>
-        <p className="text-md">200 workouts</p>
+        <p className="text-md">{userWorkouts.length} workouts</p>
       </div>
     </div>
   );

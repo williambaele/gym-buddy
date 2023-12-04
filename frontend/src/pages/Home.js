@@ -15,12 +15,12 @@ import Exercice from "../views/Exercice";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-const Home = ({ user }) => {
+const Home = ({ user, userWorkouts }) => {
   const menu = [
     {
       title: "Profile",
       svg: <FiUser />,
-      component: <Profile user={user} />,
+      component: <Profile user={user} userWorkouts={userWorkouts} />,
     },
     {
       title: "History",
