@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ExerciseForm from "./ExerciseForm";
 import { FiPlus, FiSave } from "react-icons/fi";
 import { FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { WorkoutContext } from "../context/WorkoutContext";
 
 const FormWorkout = ({ formVisibility, setFormVisibility }) => {
+  const { dispatch } = useContext(WorkoutContext);
+  const apiUrl = "/api/workouts";
+
   // Load saved workout data from localStorage on component mount
   const savedWorkout = JSON.parse(localStorage.getItem("savedWorkout")) || {
     exercises: [],
   };
-  const [exercises, setExercises] = useState(savedWorkout.exercises);
+  const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     // Save workout data to localStorage whenever exercises change
@@ -33,6 +38,26 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
     toast.success("Workout deleted");
   };
 
+  // SAVE TO DATABASE
+  const saveToDatabase = async () => {
+    try {
+      // Make a POST request to your backend API endpoint to save the workout data
+      const response = await axios.post(apiUrl, { exercises });
+
+      // Dispatch the CREATE_WORKOUT action to update the context state
+      dispatch({ type: "CREATE_WORKOUT", payload: response.data });
+
+      // Optionally, handle the response from the backend
+      console.log("Response from backend:", response.data);
+
+      // Notify the user
+      toast.success("Workout saved to the database");
+    } catch (error) {
+      console.error("Error saving workout to the database:", error.message);
+      toast.error("Error saving workout to the database");
+    }
+  };
+
   return (
     <div className="w-full p-4 bg-white rounded-md shadow-sm">
       <div className="flex items-center justify-between py-2 ">
@@ -45,6 +70,7 @@ const FormWorkout = ({ formVisibility, setFormVisibility }) => {
           />
 
           <FiSave
+            onClick={saveToDatabase}
             style={{ fontSize: "16px", color: "#312E7F" }}
             className="cursor-pointer"
           />
