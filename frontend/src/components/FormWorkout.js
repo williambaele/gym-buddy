@@ -31,8 +31,8 @@ const FormWorkout = ({ formVisibility, setFormVisibility, user }) => {
     toast.success("Workout deleted");
   };
 
-  console.log(exercises);
   // SAVE TO DATABASE ONCLICK
+  console.log(exercises);
   const saveToDatabase = async () => {
     try {
       // Ensure there are exercises to save
@@ -42,17 +42,16 @@ const FormWorkout = ({ formVisibility, setFormVisibility, user }) => {
       }
 
       // Transform the exercises structure to match the backend model
-      const transformedExercises = exercises.map(
-        ({ id, muscleGroup, name, sets }) => ({
+      const transformedExercises = exercises.map((exercise) => ({
+        id: exercise.id,
+        muscleGroup: exercise.muscleGroup,
+        name: exercise.exercise, // Assuming the exercise name is stored in 'exercise' property
+        sets: exercise.sets.map(({ id, repetitions, weight }) => ({
           id,
-          muscleGroup,
-          name,
-          sets: sets.map(({ repetitions, weight }) => ({
-            repetitions: parseInt(repetitions), // Ensure integers are sent
-            weight: parseInt(weight),
-          })),
-        })
-      );
+          repetitions: parseInt(repetitions),
+          weight: parseInt(weight),
+        })),
+      }));
 
       // Make a POST request to your backend API endpoint to save the workout data
       const response = await axios.post(apiUrl, {
@@ -60,6 +59,13 @@ const FormWorkout = ({ formVisibility, setFormVisibility, user }) => {
         date: Date.now(), // Use Date.now() for the date
         exercises: transformedExercises,
       });
+
+      if (!response || !response.data) {
+        // Handle unexpected response format
+        console.error("Unexpected response format:", response);
+        toast.error("Error saving workout to the database");
+        return;
+      }
 
       // Dispatch the CREATE_WORKOUT action to update the context state
       dispatch({ type: "CREATE_WORKOUT", payload: response.data });
@@ -71,10 +77,13 @@ const FormWorkout = ({ formVisibility, setFormVisibility, user }) => {
       toast.success("Workout saved to the database");
     } catch (error) {
       console.error("Error saving workout to the database:", error.message);
-      console.log("Error response from the server:", error.response.data);
+      if (error.response) {
+        console.log("Error response from the server:", error.response.data);
+      }
       toast.error("Error saving workout to the database");
     }
   };
+
   // ADD EXERCISE
   const addExercise = () => {
     setExercises([...exercises, { id: exercises.length + 1 }]);

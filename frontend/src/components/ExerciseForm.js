@@ -7,7 +7,7 @@ import { FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const muscleGroups = ["Chest", "Shoulder", "Arms", "Legs", "Back"];
-const exercisesByMuscleGroup = {
+const name = {
   Chest: ["Bench Press", "Incline Press", "Flyes"],
   Shoulder: ["Shoulder Press", "Lateral Raises", "Front Raises"],
   Arms: ["Bicep Curls", "Tricep Dips", "Hammer Curls"],
@@ -84,9 +84,6 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
   const [exerciseVisibility, setExerciseVisibility] = useState(true);
 
   const handleSetChange = (setId, property, value) => {
-    // Update the state or perform any necessary action
-    // For example, update the sets array in state
-
     setSets((prevSets) =>
       prevSets.map((set) =>
         set.id === setId ? { ...set, [property]: value } : set
@@ -138,13 +135,11 @@ const ExerciseForm = ({ exerciseId, onSave }) => {
             onChange={(e) => setSelectedExercise(e.target.value)}
             className="w-full col-span-2 px-2 py-1 bg-gray-100 border rounded-md"
           >
-            {(exercisesByMuscleGroup[selectedMuscleGroup] || []).map(
-              (exercise) => (
-                <option key={exercise} value={exercise}>
-                  {exercise}
-                </option>
-              )
-            )}
+            {(name[selectedMuscleGroup] || []).map((exercise) => (
+              <option key={exercise} value={exercise}>
+                {exercise}
+              </option>
+            ))}
           </select>
         </div>
       )}
